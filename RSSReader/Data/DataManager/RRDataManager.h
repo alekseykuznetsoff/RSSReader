@@ -11,6 +11,7 @@
 @interface RRDataManager : NSObject
 
 + (instancetype)sharedInstance;
+- (void)storeData;
 
 #pragma mark - --Channels
 - (NSArray *)allChannels;

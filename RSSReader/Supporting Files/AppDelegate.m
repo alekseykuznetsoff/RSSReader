@@ -8,8 +8,11 @@
 
 #import "AppDelegate.h"
 #import <MagicalRecord/MagicalRecord.h>
+#import "RRDataManager.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic) RRDataManager *model;
 
 @end
 
@@ -26,12 +29,21 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-
+    [self.model storeData];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    [self.model storeData];
+}
 
+#pragma mark - --Setters&Getters
+- (RRDataManager *)model
+{
+    if (!_model) {
+        _model = [RRDataManager sharedInstance];
+    }
+    return _model;
 }
 
 @end

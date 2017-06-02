@@ -43,6 +43,11 @@
     }
 }
 
+- (void)storeData
+{
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:nil];
+}
+
 #pragma mark - --Channels
 - (NSArray *)allChannels
 {
