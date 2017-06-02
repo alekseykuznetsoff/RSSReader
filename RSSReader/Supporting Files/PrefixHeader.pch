@@ -1,0 +1,18 @@
+//
+//  PrefixHeader.pch
+//  RSSReader
+//
+//  Created by Kuznetsov Aleksey on 02.06.17.
+//  Copyright © 2017 Kuznetsov Aleksey. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+
+#import "Macro.h"
+
+#endif
+
+#endif /* PrefixHeader_pch */
