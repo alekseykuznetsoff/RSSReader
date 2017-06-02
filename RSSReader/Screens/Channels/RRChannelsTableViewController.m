@@ -8,6 +8,7 @@
 
 #import "RRChannelsTableViewController.h"
 #import "RRDataManager.h"
+#import "RRItemsTableViewController.h"
 
 @interface RRChannelsTableViewController () <UITextFieldDelegate>
 
@@ -27,11 +28,6 @@
     self.objects = [self.model allChannels];
     
     self.title = @"Channels";
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - --Setters&Getters
@@ -101,9 +97,15 @@
     return YES;
 }
 
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:NSStringFromClass(RRItemsTableViewController.class) sender:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -142,14 +144,14 @@
     }
 }
 
-/*
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:NSStringFromClass(RRItemsTableViewController.class)]) {
+        RRItemsTableViewController *vc = segue.destinationViewController;
+        NSUInteger index = [[self.tableView indexPathForSelectedRow] row];
+        [vc setChannel:self.objects[index]];
+    }
 }
-*/
 
 @end
