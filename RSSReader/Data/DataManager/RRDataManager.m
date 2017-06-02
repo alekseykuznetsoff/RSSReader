@@ -8,7 +8,6 @@
 
 #import "RRDataManager.h"
 #import <MagicalRecord/MagicalRecord.h>
-#import "RRChannel+CoreDataClass.h"
 
 @implementation RRDataManager
 
@@ -32,8 +31,8 @@
 
 - (void)createPresetChannelsIfNeeded
 {
-    NSArray *allCannels = [RRChannel MR_findAll];
-    if (!allCannels.count) {
+    NSUInteger count = [RRChannel MR_countOfEntities];
+    if (!count) {
         NSArray *channels = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"PresetChannels" ofType:@"plist"]];
         for (int i = 0; i<channels.count; i++) {
             RRChannel *channel = [RRChannel MR_createEntity];
@@ -52,6 +51,22 @@
 - (NSArray *)allChannels
 {
     return [RRChannel MR_findAllSortedBy:@"index" ascending:YES];
+}
+
+- (RRChannel *)createChannel:(NSString *)link
+{
+    //Here there can be a check on validity of the link
+    
+    RRChannel *lastChannel = [[self allChannels] lastObject];
+    RRChannel *channel = [RRChannel MR_createEntity];
+    channel.index = lastChannel.index + 1;
+    channel.link = link;
+    return channel;
+}
+
+- (void)deleteChannel:(RRChannel *)channel
+{
+    [channel MR_deleteEntity];
 }
 
 @end

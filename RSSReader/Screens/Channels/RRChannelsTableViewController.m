@@ -8,7 +8,6 @@
 
 #import "RRChannelsTableViewController.h"
 #import "RRDataManager.h"
-#import "RRChannel+CoreDataClass.h"
 
 @interface RRChannelsTableViewController () <UITextFieldDelegate>
 
@@ -71,11 +70,26 @@
     }];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSLog(@"URL %@", [[weakSelf.addChannelAlertController textFields][0] text]);
+        NSString *link = [[weakSelf.addChannelAlertController textFields][0] text];
+        [weakSelf addNewChannnel:[weakSelf.model createChannel:link]];
     }];
     okAction.enabled = NO;
     [alert addAction:okAction];
     return alert;
+}
+
+- (void)addNewChannnel:(RRChannel *)channel
+{
+    if (channel) {
+        NSUInteger index = self.objects.count;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        NSMutableArray *mArray = [self.objects mutableCopy];
+        [mArray addObject:channel];
+        self.objects = [mArray copy];
+        [self.tableView beginUpdates];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        [self.tableView endUpdates];
+    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -106,6 +120,26 @@
     RRChannel *channel = self.objects[indexPath.row];
     cell.textLabel.text = channel.link;
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        RRChannel *channel = self.objects[indexPath.row];
+        NSMutableArray *mArray = [self.objects mutableCopy];
+        [mArray removeObject:channel];
+        self.objects = [mArray copy];
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                              withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView endUpdates];
+        [self.model deleteChannel:channel];
+    }
 }
 
 /*
