@@ -15,6 +15,9 @@
 @property (nonatomic) RRDataManager *model;
 @property (nonatomic) NSArray *objects;
 
+@property (nonatomic) UIAlertController *addChannelAlertController;
+- (IBAction)addChannelAction:(UIBarButtonItem *)sender;
+
 @end
 
 @implementation RRChannelsTableViewController
@@ -23,6 +26,8 @@
     [super viewDidLoad];
     
     self.objects = [self.model allChannels];
+    
+    self.title = @"Channels";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +43,50 @@
     }
     return _model;
 }
+
+- (UIAlertController *)addChannelAlertController
+{
+    if (!_addChannelAlertController) {
+        _addChannelAlertController = [self createAddChannelAlertController];
+    }
+    return _addChannelAlertController;
+}
+
+#pragma mark - UI Handlers
+- (IBAction)addChannelAction:(UIBarButtonItem *)sender
+{
+    [self presentViewController:self.addChannelAlertController
+                       animated:YES
+                     completion:nil];
+}
+
+#pragma mark - --UIAlertController
+- (UIAlertController *)createAddChannelAlertController
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add new feed" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    __weak typeof(self) weakSelf = self;
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"URL";
+        textField.delegate = weakSelf;
+    }];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSLog(@"URL %@", [[weakSelf.addChannelAlertController textFields][0] text]);
+    }];
+    okAction.enabled = NO;
+    [alert addAction:okAction];
+    return alert;
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *finalString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    UIAlertAction *okAction = self.addChannelAlertController.actions.lastObject;
+    okAction.enabled = finalString.length > 0;
+    return YES;
+}
+
 
 #pragma mark - Table view data source
 

@@ -84,7 +84,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="QwG-Uh-fni">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="vof-Ci-Y3J"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="vof-Ci-Y3J">
+                            <connections>
+                                <action selector="addChannelAction:" destination="Pzv-49-r0U" id="fJS-xW-WdI"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lNU-I4-iTV" userLabel="First Responder" sceneMemberID="firstResponder"/>
