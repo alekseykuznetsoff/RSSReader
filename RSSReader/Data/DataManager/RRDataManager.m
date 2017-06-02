@@ -43,7 +43,10 @@
     }
 }
 
-#pragma mark - --Data
-
+#pragma mark - --Channels
+- (NSArray *)allChannels
+{
+    return [RRChannel MR_findAllSortedBy:@"index" ascending:YES];
+}
 
 @end

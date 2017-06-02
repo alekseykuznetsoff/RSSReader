@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RRChannelsTableViewController.h
 //  RSSReader
 //
 //  Created by Kuznetsov Aleksey on 02.06.17.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface RRChannelsTableViewController : UITableViewController
 
 @end
-

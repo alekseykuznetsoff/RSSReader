@@ -13,10 +13,10 @@
 		8623979E1EE182460086DC51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8623979A1EE182460086DC51 /* main.m */; };
 		862397A41EE1827E0086DC51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 862397A01EE1827E0086DC51 /* LaunchScreen.storyboard */; };
 		862397A51EE1827E0086DC51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 862397A11EE1827E0086DC51 /* Main.storyboard */; };
-		862397A61EE1827E0086DC51 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862397A31EE1827E0086DC51 /* ViewController.m */; };
 		862397B11EE19BEE0086DC51 /* RSSReader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 862397AF1EE19BEE0086DC51 /* RSSReader.xcdatamodeld */; };
 		862397B41EE1A04A0086DC51 /* RRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 862397B31EE1A04A0086DC51 /* RRDataManager.m */; };
 		862397B61EE1A62B0086DC51 /* PresetChannels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 862397B51EE1A62B0086DC51 /* PresetChannels.plist */; };
+		862397BA1EE1ABBD0086DC51 /* RRChannelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862397B91EE1ABBD0086DC51 /* RRChannelsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,14 +28,14 @@
 		8623979A1EE182460086DC51 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		862397A01EE1827E0086DC51 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		862397A11EE1827E0086DC51 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		862397A21EE1827E0086DC51 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		862397A31EE1827E0086DC51 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		862397AB1EE196C60086DC51 /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		862397AC1EE196DE0086DC51 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		862397B01EE19BEE0086DC51 /* RSSReader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RSSReader.xcdatamodel; sourceTree = "<group>"; };
 		862397B21EE1A04A0086DC51 /* RRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRDataManager.h; sourceTree = "<group>"; };
 		862397B31EE1A04A0086DC51 /* RRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRDataManager.m; sourceTree = "<group>"; };
 		862397B51EE1A62B0086DC51 /* PresetChannels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PresetChannels.plist; sourceTree = "<group>"; };
+		862397B81EE1ABBD0086DC51 /* RRChannelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRChannelsTableViewController.h; sourceTree = "<group>"; };
+		862397B91EE1ABBD0086DC51 /* RRChannelsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRChannelsTableViewController.m; sourceTree = "<group>"; };
 		AB1472C44E37360B3D9DF40C /* libPods-RSSReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RSSReader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC72E3F6C4A4A0EC6815465 /* Pods-RSSReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSSReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-RSSReader/Pods-RSSReader.release.xcconfig"; sourceTree = "<group>"; };
 		E6179A0B0F59085B0D90D9B2 /* Pods-RSSReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSSReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RSSReader/Pods-RSSReader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -107,10 +107,9 @@
 		8623979F1EE1827E0086DC51 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				862397B71EE1ABA60086DC51 /* Channels */,
 				862397A01EE1827E0086DC51 /* LaunchScreen.storyboard */,
 				862397A11EE1827E0086DC51 /* Main.storyboard */,
-				862397A21EE1827E0086DC51 /* ViewController.h */,
-				862397A31EE1827E0086DC51 /* ViewController.m */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -139,6 +138,15 @@
 				862397AF1EE19BEE0086DC51 /* RSSReader.xcdatamodeld */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		862397B71EE1ABA60086DC51 /* Channels */ = {
+			isa = PBXGroup;
+			children = (
+				862397B81EE1ABBD0086DC51 /* RRChannelsTableViewController.h */,
+				862397B91EE1ABBD0086DC51 /* RRChannelsTableViewController.m */,
+			);
+			path = Channels;
 			sourceTree = "<group>";
 		};
 		B9F3C0F043E05185C0C7C6B6 /* Pods */ = {
@@ -278,7 +286,7 @@
 				862397B11EE19BEE0086DC51 /* RSSReader.xcdatamodeld in Sources */,
 				862397B41EE1A04A0086DC51 /* RRDataManager.m in Sources */,
 				8623979B1EE182460086DC51 /* AppDelegate.m in Sources */,
-				862397A61EE1827E0086DC51 /* ViewController.m in Sources */,
+				862397BA1EE1ABBD0086DC51 /* RRChannelsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

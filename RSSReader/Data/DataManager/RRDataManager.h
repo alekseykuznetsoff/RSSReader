@@ -12,5 +12,8 @@
 
 + (instancetype)sharedInstance;
 
+#pragma mark - --Channels
+- (NSArray *)allChannels;
+
 
 @end
