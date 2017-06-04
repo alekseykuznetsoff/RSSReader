@@ -30,6 +30,12 @@
     self.title = @"Channels";
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 #pragma mark - --Setters&Getters
 - (RRDataManager *)model
 {
@@ -118,9 +124,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
     RRChannel *channel = self.objects[indexPath.row];
-    cell.textLabel.text = channel.link;
+    UITableViewCell *cell;
+    if (channel.title.length) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Subtitle" forIndexPath:indexPath];
+        cell.textLabel.text = channel.title;
+        cell.detailTextLabel.text = channel.link;
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
+        cell.textLabel.text = channel.link;
+    }
     return cell;
 }
 

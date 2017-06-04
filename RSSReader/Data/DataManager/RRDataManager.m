@@ -8,6 +8,13 @@
 
 #import "RRDataManager.h"
 #import <MagicalRecord/MagicalRecord.h>
+#import "RRXMLParser.h"
+
+@interface RRDataManager ()
+
+@property RRXMLParser *parser;
+
+@end
 
 @implementation RRDataManager
 
@@ -68,5 +75,28 @@
 {
     [channel MR_deleteEntity];
 }
+
+#pragma mark - --Items
+- (void)loadItemsOfChannel:(RRChannel *)channel withBlock:(void (^)(NSArray *items, NSError *error))block
+{
+    __weak typeof(self) weakSelf = self;
+    self.parser = [RRXMLParser parserWithChannel:channel withBlock:^(NSArray *items, NSError *error) {
+        if (items.count && block) {
+            block(items, error);
+        }
+        if (!items && !error && block) {
+            NSLog(@"!!!!!!!!!!!");
+        }
+        weakSelf.parser = nil;
+    }];
+    [self.parser parse];
+}
+
+- (void)abortLoading
+{
+    [self.parser cancel];
+    self.parser = nil;
+}
+
 
 @end

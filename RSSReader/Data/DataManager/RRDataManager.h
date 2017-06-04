@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RRChannel+CoreDataClass.h"
+#import "RRChannel.h"
 
 @interface RRDataManager : NSObject
 
@@ -18,5 +18,9 @@
 - (NSArray *)allChannels;
 - (RRChannel *)createChannel:(NSString *)link;
 - (void)deleteChannel:(RRChannel *)channel;
+
+#pragma mark - --Items
+- (void)loadItemsOfChannel:(RRChannel *)channel withBlock:(void (^)(NSArray *items, NSError *error))block;
+- (void)abortLoading;
 
 @end
