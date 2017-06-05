@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B5A2553BC3921F5EB420449 /* libPods-RSSReader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1472C44E37360B3D9DF40C /* libPods-RSSReader.a */; };
+		8617942A1EE5EF6600FEF468 /* RRItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 861794291EE5EF6600FEF468 /* RRItemCell.m */; };
 		8623979B1EE182460086DC51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 862397971EE182460086DC51 /* AppDelegate.m */; };
 		8623979C1EE182460086DC51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 862397981EE182460086DC51 /* Assets.xcassets */; };
 		8623979E1EE182460086DC51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8623979A1EE182460086DC51 /* main.m */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		861794281EE5EF6600FEF468 /* RRItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRItemCell.h; sourceTree = "<group>"; };
+		861794291EE5EF6600FEF468 /* RRItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRItemCell.m; sourceTree = "<group>"; };
 		862397781EE181770086DC51 /* RSSReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		862397961EE182460086DC51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		862397971EE182460086DC51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -75,6 +78,15 @@
 				AB1472C44E37360B3D9DF40C /* libPods-RSSReader.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		861794271EE5EF5200FEF468 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				861794281EE5EF6600FEF468 /* RRItemCell.h */,
+				861794291EE5EF6600FEF468 /* RRItemCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		8623976F1EE181770086DC51 = {
@@ -175,6 +187,7 @@
 		862397BB1EE1DD660086DC51 /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				861794271EE5EF5200FEF468 /* Cells */,
 				862397BC1EE1DD800086DC51 /* RRItemsTableViewController.h */,
 				862397BD1EE1DD800086DC51 /* RRItemsTableViewController.m */,
 			);
@@ -341,6 +354,7 @@
 				8623979B1EE182460086DC51 /* AppDelegate.m in Sources */,
 				86F03D6C1EE5A2520009B97F /* RRDataLoader.m in Sources */,
 				862397BE1EE1DD800086DC51 /* RRItemsTableViewController.m in Sources */,
+				8617942A1EE5EF6600FEF468 /* RRItemCell.m in Sources */,
 				86F03D4F1EE2D6E60009B97F /* RRXMLParser.m in Sources */,
 				862397BA1EE1ABBD0086DC51 /* RRChannelsTableViewController.m in Sources */,
 			);

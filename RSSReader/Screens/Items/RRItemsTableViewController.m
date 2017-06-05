@@ -9,6 +9,7 @@
 #import "RRItemsTableViewController.h"
 #import "RRDataManager.h"
 #import "RRItem.h"
+#import "RRItemCell.h"
 
 @interface RRItemsTableViewController ()
 
@@ -23,12 +24,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Loading...";
+    
+    self.tableView.estimatedRowHeight = self.tableView.rowHeight;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self.model abortLoadingItemsLink:self.channel.link];
+}
+
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows withRowAnimation:UITableViewRowAnimationNone];
+    } completion:nil];
 }
 
 #pragma mark - --Setters&Getters
@@ -65,6 +76,18 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView
+heightForHeaderInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView
+heightForFooterInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -79,9 +102,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RRItem *item = self.objects[indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Subtitle" forIndexPath:indexPath];
-    cell.textLabel.text = item.title;
-    cell.detailTextLabel.text = item.text;
+    RRItemCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(RRItemCell.class) forIndexPath:indexPath];
+    [cell setModel:item];
     return cell;
 }
 
