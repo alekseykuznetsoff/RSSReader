@@ -9,10 +9,12 @@
 #import "RRDataManager.h"
 #import <MagicalRecord/MagicalRecord.h>
 #import "RRXMLParser.h"
+#import "RRDataLoader.h"
 
 @interface RRDataManager ()
 
-@property RRXMLParser *parser;
+@property (nonatomic) RRXMLParser *parser;
+@property (nonatomic) RRDataLoader *loader;
 
 @end
 
@@ -31,6 +33,8 @@
 - (instancetype)init
 {
     if ((self = [super init])){
+        _loader = [RRDataLoader new];
+        _parser = [RRXMLParser new];
         [self createPresetChannelsIfNeeded];
     }
     return self;
@@ -77,26 +81,22 @@
 }
 
 #pragma mark - --Items
-- (void)loadItemsOfChannel:(RRChannel *)channel withBlock:(void (^)(NSArray *items, NSError *error))block
+- (void)loadItemsLink:(NSString *)link withBlock:(void (^)(NSError *error))block
 {
     __weak typeof(self) weakSelf = self;
-    self.parser = [RRXMLParser parserWithChannel:channel withBlock:^(NSArray *items, NSError *error) {
-        if (items.count && block) {
-            block(items, error);
+    [self.loader loadDataLink:link withBlock:^(NSData *data, NSError *error) {
+        if (data) {
+            [weakSelf.parser parseData:data channelLink:link block:block];
+        } else {
+            block == nil ?: block(error);
         }
-        if (!items && !error && block) {
-            NSLog(@"!!!!!!!!!!!");
-        }
-        weakSelf.parser = nil;
     }];
-    [self.parser parse];
 }
 
-- (void)abortLoading
+- (void)abortLoadingItemsLink:(NSString *)link
 {
-    [self.parser cancel];
-    self.parser = nil;
+    [self.loader abortLoading];
+    [self.parser abortParsing];
 }
-
 
 @end

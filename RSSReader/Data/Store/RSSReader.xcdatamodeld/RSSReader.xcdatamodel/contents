@@ -4,8 +4,18 @@
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RRItem" inverseName="channel" inverseEntity="RRItem" syncable="YES"/>
+    </entity>
+    <entity name="RRItem" representedClassName="RRItem" syncable="YES" codeGenerationType="category">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pubDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="channel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RRChannel" inverseName="items" inverseEntity="RRChannel" syncable="YES"/>
     </entity>
     <elements>
-        <element name="RRChannel" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="RRChannel" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="RRItem" positionX="-63" positionY="9" width="128" height="135"/>
     </elements>
 </model>

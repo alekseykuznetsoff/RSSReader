@@ -1,5 +1,5 @@
 //
-//  RRChannel.h
+//  RRItem.h
 //  RSSReader
 //
 //  Created by Kuznetsov Aleksey on 04.06.17.
@@ -9,10 +9,11 @@
 #import <CoreData/CoreData.h>
 #import "XMLMappedObject.h"
 
-@class RRItem;
+@class RRChannel;
 
-@interface RRChannel : NSManagedObject <XMLMappedObject>
+@interface RRItem : NSManagedObject <XMLMappedObject>
 
 @end
 
-#import "RRChannel+CoreDataProperties.h"
+#import "RRItem+CoreDataProperties.h"
+

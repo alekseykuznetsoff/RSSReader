@@ -8,6 +8,7 @@
 
 #import "RRItemsTableViewController.h"
 #import "RRDataManager.h"
+#import "RRItem.h"
 
 @interface RRItemsTableViewController ()
 
@@ -21,13 +22,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@", self.channel);
+    self.title = @"Loading...";
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.model abortLoading];
+    [self.model abortLoadingItemsLink:self.channel.link];
 }
 
 #pragma mark - --Setters&Getters
@@ -49,18 +50,12 @@
 - (void)loadData
 {
     __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self.model loadItemsOfChannel:self.channel withBlock:^(NSArray *items, NSError *error)
-         {
-             if (items.count) {
-                 weakSelf.objects = items;
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     [weakSelf.tableView reloadData];
-                 });
-             }
-             //todo: error handling
-         }];
-    });
+    [self.model loadItemsLink:[self.channel.link copy] withBlock:^(NSError *error) {
+        //todo: error handling
+        weakSelf.title = weakSelf.channel.title;
+        weakSelf.objects = weakSelf.channel.items.allObjects;
+        [weakSelf.tableView reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -79,6 +74,15 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.objects.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RRItem *item = self.objects[indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Subtitle" forIndexPath:indexPath];
+    cell.textLabel.text = item.title;
+    cell.detailTextLabel.text = item.text;
+    return cell;
 }
 
 @end

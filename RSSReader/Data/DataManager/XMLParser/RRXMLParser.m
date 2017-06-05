@@ -9,51 +9,107 @@
 #import "RRXMLParser.h"
 #import "RRChannel.h"
 #import "XMLMappedObject.h"
+#import "RRItem.h"
+#import <MagicalRecord/MagicalRecord.h>
 
 @interface RRXMLParser () <NSXMLParserDelegate>
 
+@property (nonatomic) NSManagedObjectContext *moc;
 @property (nonatomic) NSXMLParser *parser;
 @property (nonatomic) RRChannel *channel;
-@property (atomic, copy) void (^callbackBlock)(NSArray *items, NSError *error);
+@property (atomic, copy) void (^callbackBlock)(NSError *error);
 
 @property (nonatomic) NSMutableArray *elements;
 @property (nonatomic) NSMutableArray *objects;
 @property (nonatomic) NSMutableString *characters;
+@property (nonatomic) NSError *error;
+
+@property (nonatomic) NSSet *oldItems;
+@property (nonatomic) NSMutableSet *parsedItems;
 
 - (id <XMLMappedObject>)objectForElementNamed:(NSString *)elementName
                                withAttributes:(NSDictionary *)attributes
                                 currentObject:(id <XMLMappedObject>)current;
+- (void)asyncParse;
+- (void)parserDidEndSuccess:(BOOL)success;
+- (void)cleanAll;
 
 @end
 
 @implementation RRXMLParser
 
-+ (instancetype)parserWithChannel:(RRChannel *)channel withBlock:(void (^)(NSArray *items, NSError *error))block
+- (void)parseData:(NSData *)data
+      channelLink:(NSString *)link
+            block:(void (^)(NSError *error))block
 {
-    RRXMLParser *object = [RRXMLParser new];
-    object.channel = channel;
-    object.callbackBlock = block;
-    return object;
+    self.moc = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
+    self.channel = [RRChannel MR_findFirstByAttribute:@"link" withValue:link inContext:self.moc];
+    self.callbackBlock = block;
+    self.parser = [[NSXMLParser alloc] initWithData:data];
+    self.parser.delegate = self;
+    [self asyncParse];
+}
+
+- (void)asyncParse
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self parse];
+    });
 }
 
 - (void)parse
 {
-    NSURL *url = [NSURL URLWithString:self.channel.link];
-    self.parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
-    self.parser.delegate = self;
-    
     self.elements = [NSMutableArray new];
     self.objects = [NSMutableArray new];
+    self.oldItems = [self.channel.items copy];
+    self.parsedItems = [NSMutableSet new];
     
-    if (![self.parser parse]) {
-        self.callbackBlock == nil ?: self.callbackBlock(nil, nil);
+    if (self.callbackBlock && ![self.parser parse]) {
+        [self parserDidEndSuccess:NO];
     }
 }
 
-- (void)cancel
+- (void)abortParsing
+{
+    [self.parser abortParsing];
+    [self cleanAll];
+}
+
+- (void)cleanAll
 {
     self.callbackBlock = nil;
-    [self.parser abortParsing];
+    self.parser.delegate = nil;
+    self.parser = nil;
+    self.moc = nil;
+    self.channel = nil;
+    self.elements = nil;
+    self.objects = nil;
+    self.oldItems = nil;
+    self.parsedItems = nil;
+    self.error = nil;
+}
+
+- (void)parserDidEndSuccess:(BOOL)success
+{
+    if (self.callbackBlock) {
+        if (success) {
+            if (self.parsedItems.count) {
+                for (RRItem *item in self.oldItems) {
+                    [item MR_deleteEntityInContext:self.moc];
+                }
+            }
+            if (self.moc.hasChanges) {
+                NSManagedObjectContext *localContext = self.moc;
+                [localContext performBlockAndWait:^{
+                    [localContext save:nil];
+                }];
+            }
+        }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.callbackBlock == nil ?: self.callbackBlock(self.error);
+        });
+        [self cleanAll];
+    }
 }
 
 - (id <XMLMappedObject>)objectForElementNamed:(NSString *)elementName withAttributes:(NSDictionary *)attributes currentObject:(id<XMLMappedObject>)current
@@ -61,18 +117,20 @@
     if ([elementName isEqualToString:@"channel"]) {
         return self.channel;
     }
+    if ([elementName isEqualToString:@"item"]) {
+        RRItem *item = [RRItem MR_createEntityInContext:self.moc];
+        item.channel = self.channel;
+        [self.parsedItems addObject:item];
+        return item;
+    }
     
     return current;
 }
 
 #pragma mark NSXMLParser Delegate Methods
-
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI
  qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
 {
-//    NSLog(@"elementName: %@", elementName);
-//    NSLog(@"attributeDict: %@", attributeDict);
-    
     [self.elements addObject:elementName];
     
     id <XMLMappedObject> object = [self objectForElementNamed:elementName withAttributes:attributeDict currentObject:[self.objects lastObject]];
@@ -80,13 +138,10 @@
     if (object) {
         [self.objects addObject:object];
     }
-    
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-//    NSLog(@"foundCharacters: %@", string);
-    
     if (!self.characters) {
         self.characters = [NSMutableString new];
     }
@@ -96,8 +151,6 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
-//    NSLog(@"elementName: %@", elementName);
-    
     NSAssert([[self.elements lastObject] isEqualToString:elementName], @"Attempt to end tag other than the current head.");
     
     [self.elements removeLastObject];
@@ -119,17 +172,21 @@
 -(void) parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     NSLog(@"parseError: %@", parseError);
+    self.error = parseError;
+    [self parserDidEndSuccess:NO];
 }
 
 -(void) parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError
 {
     NSLog(@"validationError: %@", validationError);
+    self.error = validationError;
+    [self parserDidEndSuccess:NO];
+
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    self.callbackBlock == nil ?: self.callbackBlock(nil, nil);
-    
+    [self parserDidEndSuccess:YES];
 }
 
 @end

@@ -20,7 +20,7 @@
 - (void)deleteChannel:(RRChannel *)channel;
 
 #pragma mark - --Items
-- (void)loadItemsOfChannel:(RRChannel *)channel withBlock:(void (^)(NSArray *items, NSError *error))block;
-- (void)abortLoading;
+- (void)loadItemsLink:(NSString *)link withBlock:(void (^)(NSError *error))block;
+- (void)abortLoadingItemsLink:(NSString *)link;
 
 @end

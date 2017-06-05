@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-@class RRChannel;
 
 @interface RRXMLParser : NSObject
 
-+ (instancetype)parserWithChannel:(RRChannel *)channel withBlock:(void (^)(NSArray *items, NSError *error))block;
-- (void)parse;
-- (void)cancel;
+- (void)parseData:(NSData *)data
+      channelLink:(NSString *)link
+            block:(void (^)(NSError *error))block;
+
+- (void)abortParsing;
 
 @end

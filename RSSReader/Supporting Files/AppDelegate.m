@@ -20,8 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelVerbose];
 //    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelVerbose];
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:CORE_DATA_STORE_NAME];
     
     return YES;
