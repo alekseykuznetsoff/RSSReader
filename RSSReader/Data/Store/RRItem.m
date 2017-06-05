@@ -7,7 +7,7 @@
 //
 
 #import "RRItem.h"
-#import <MagicalRecord/MagicalRecord.h>
+#import "NSDate+InternetDateTime.h"
 
 @implementation RRItem
 
@@ -21,6 +21,7 @@
     }
     if ([elementName isEqualToString:@"pubDate"]) {
         self.pubDate = string;
+        self.date = [NSDate dateFromInternetDateTimeString:string formatHint:DateFormatHintRFC822];
     }
     if ([elementName isEqualToString:@"description"]) {
         self.text = string;

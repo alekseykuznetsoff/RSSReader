@@ -8,6 +8,7 @@
     </entity>
     <entity name="RRItem" representedClassName="RRItem" syncable="YES" codeGenerationType="category">
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pubDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,6 +17,6 @@
     </entity>
     <elements>
         <element name="RRChannel" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="RRItem" positionX="-63" positionY="9" width="128" height="135"/>
+        <element name="RRItem" positionX="-63" positionY="9" width="128" height="150"/>
     </elements>
 </model>

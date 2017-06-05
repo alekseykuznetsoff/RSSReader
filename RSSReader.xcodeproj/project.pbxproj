@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5B5A2553BC3921F5EB420449 /* libPods-RSSReader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1472C44E37360B3D9DF40C /* libPods-RSSReader.a */; };
 		8617942A1EE5EF6600FEF468 /* RRItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 861794291EE5EF6600FEF468 /* RRItemCell.m */; };
+		8617942F1EE60A8A00FEF468 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8617942E1EE60A8A00FEF468 /* NSDate+InternetDateTime.m */; };
 		8623979B1EE182460086DC51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 862397971EE182460086DC51 /* AppDelegate.m */; };
 		8623979C1EE182460086DC51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 862397981EE182460086DC51 /* Assets.xcassets */; };
 		8623979E1EE182460086DC51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8623979A1EE182460086DC51 /* main.m */; };
@@ -28,6 +29,8 @@
 /* Begin PBXFileReference section */
 		861794281EE5EF6600FEF468 /* RRItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRItemCell.h; sourceTree = "<group>"; };
 		861794291EE5EF6600FEF468 /* RRItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRItemCell.m; sourceTree = "<group>"; };
+		8617942D1EE60A8A00FEF468 /* NSDate+InternetDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+InternetDateTime.h"; sourceTree = "<group>"; };
+		8617942E1EE60A8A00FEF468 /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; };
 		862397781EE181770086DC51 /* RSSReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		862397961EE182460086DC51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		862397971EE182460086DC51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -89,6 +92,23 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		8617942B1EE60A2500FEF468 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8617942C1EE60A6000FEF468 /* NSDate+InternetDateTime */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8617942C1EE60A6000FEF468 /* NSDate+InternetDateTime */ = {
+			isa = PBXGroup;
+			children = (
+				8617942D1EE60A8A00FEF468 /* NSDate+InternetDateTime.h */,
+				8617942E1EE60A8A00FEF468 /* NSDate+InternetDateTime.m */,
+			);
+			path = "NSDate+InternetDateTime";
+			sourceTree = "<group>";
+		};
 		8623976F1EE181770086DC51 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +132,7 @@
 			children = (
 				862397A71EE182A80086DC51 /* Data */,
 				8623979F1EE1827E0086DC51 /* Screens */,
+				8617942B1EE60A2500FEF468 /* Extensions */,
 				862397951EE182460086DC51 /* Supporting Files */,
 			);
 			path = RSSReader;
@@ -350,6 +371,7 @@
 				86F03D591EE468D00009B97F /* RRChannel.m in Sources */,
 				862397B11EE19BEE0086DC51 /* RSSReader.xcdatamodeld in Sources */,
 				86F03D5C1EE476EF0009B97F /* RRItem.m in Sources */,
+				8617942F1EE60A8A00FEF468 /* NSDate+InternetDateTime.m in Sources */,
 				862397B41EE1A04A0086DC51 /* RRDataManager.m in Sources */,
 				8623979B1EE182460086DC51 /* AppDelegate.m in Sources */,
 				86F03D6C1EE5A2520009B97F /* RRDataLoader.m in Sources */,

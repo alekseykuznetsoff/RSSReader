@@ -63,10 +63,16 @@
     __weak typeof(self) weakSelf = self;
     [self.model loadItemsLink:[self.channel.link copy] withBlock:^(NSError *error) {
         //todo: error handling
-        weakSelf.title = weakSelf.channel.title;
-        weakSelf.objects = weakSelf.channel.items.allObjects;
-        [weakSelf.tableView reloadData];
+        [weakSelf dataDidLoad];
     }];
+}
+
+- (void)dataDidLoad
+{
+    self.title = self.channel.title;
+    NSSortDescriptor *dsc = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
+    self.objects = [self.channel.items sortedArrayUsingDescriptors:@[dsc]];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate
