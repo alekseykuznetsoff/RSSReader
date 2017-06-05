@@ -98,12 +98,8 @@
                     [item MR_deleteEntityInContext:self.moc];
                 }
             }
-            if (self.moc.hasChanges) {
-                NSManagedObjectContext *localContext = self.moc;
-                [localContext performBlockAndWait:^{
-                    [localContext save:nil];
-                }];
-            }
+            [self.moc MR_saveOnlySelfAndWait];
+            [self.moc.parentContext MR_saveToPersistentStoreWithCompletion:nil];
         }
         dispatch_sync(dispatch_get_main_queue(), ^{
             self.callbackBlock == nil ?: self.callbackBlock(self.error);
