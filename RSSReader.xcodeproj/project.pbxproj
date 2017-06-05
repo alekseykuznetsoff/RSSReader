@@ -11,6 +11,8 @@
 		8617942A1EE5EF6600FEF468 /* RRItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 861794291EE5EF6600FEF468 /* RRItemCell.m */; };
 		8617942F1EE60A8A00FEF468 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8617942E1EE60A8A00FEF468 /* NSDate+InternetDateTime.m */; };
 		861794331EE6153E00FEF468 /* RRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861794321EE6153E00FEF468 /* RRWebViewController.m */; };
+		861794371EE61C6700FEF468 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 861794361EE61C6700FEF468 /* NSString+HTML.m */; };
+		8617943A1EE61C9100FEF468 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 861794391EE61C9100FEF468 /* GTMNSString+HTML.m */; };
 		8623979B1EE182460086DC51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 862397971EE182460086DC51 /* AppDelegate.m */; };
 		8623979C1EE182460086DC51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 862397981EE182460086DC51 /* Assets.xcassets */; };
 		8623979E1EE182460086DC51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8623979A1EE182460086DC51 /* main.m */; };
@@ -34,6 +36,10 @@
 		8617942E1EE60A8A00FEF468 /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; };
 		861794311EE6153E00FEF468 /* RRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRWebViewController.h; sourceTree = "<group>"; };
 		861794321EE6153E00FEF468 /* RRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRWebViewController.m; sourceTree = "<group>"; };
+		861794351EE61C6700FEF468 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		861794361EE61C6700FEF468 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		861794381EE61C9100FEF468 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		861794391EE61C9100FEF468 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		862397781EE181770086DC51 /* RSSReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		862397961EE182460086DC51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		862397971EE182460086DC51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -98,6 +104,7 @@
 		8617942B1EE60A2500FEF468 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				861794341EE61C5B00FEF468 /* NSString+HTML */,
 				8617942C1EE60A6000FEF468 /* NSDate+InternetDateTime */,
 			);
 			path = Extensions;
@@ -119,6 +126,17 @@
 				861794321EE6153E00FEF468 /* RRWebViewController.m */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		861794341EE61C5B00FEF468 /* NSString+HTML */ = {
+			isa = PBXGroup;
+			children = (
+				861794351EE61C6700FEF468 /* NSString+HTML.h */,
+				861794361EE61C6700FEF468 /* NSString+HTML.m */,
+				861794381EE61C9100FEF468 /* GTMNSString+HTML.h */,
+				861794391EE61C9100FEF468 /* GTMNSString+HTML.m */,
+			);
+			path = "NSString+HTML";
 			sourceTree = "<group>";
 		};
 		8623976F1EE181770086DC51 = {
@@ -382,6 +400,7 @@
 			files = (
 				8623979E1EE182460086DC51 /* main.m in Sources */,
 				86F03D591EE468D00009B97F /* RRChannel.m in Sources */,
+				8617943A1EE61C9100FEF468 /* GTMNSString+HTML.m in Sources */,
 				862397B11EE19BEE0086DC51 /* RSSReader.xcdatamodeld in Sources */,
 				86F03D5C1EE476EF0009B97F /* RRItem.m in Sources */,
 				8617942F1EE60A8A00FEF468 /* NSDate+InternetDateTime.m in Sources */,
@@ -390,6 +409,7 @@
 				86F03D6C1EE5A2520009B97F /* RRDataLoader.m in Sources */,
 				862397BE1EE1DD800086DC51 /* RRItemsTableViewController.m in Sources */,
 				8617942A1EE5EF6600FEF468 /* RRItemCell.m in Sources */,
+				861794371EE61C6700FEF468 /* NSString+HTML.m in Sources */,
 				86F03D4F1EE2D6E60009B97F /* RRXMLParser.m in Sources */,
 				861794331EE6153E00FEF468 /* RRWebViewController.m in Sources */,
 				862397BA1EE1ABBD0086DC51 /* RRChannelsTableViewController.m in Sources */,

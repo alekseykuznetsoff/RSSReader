@@ -8,6 +8,7 @@
 
 #import "RRItem.h"
 #import "NSDate+InternetDateTime.h"
+#import "NSString+HTML.h"
 
 @implementation RRItem
 
@@ -24,7 +25,7 @@
         self.date = [NSDate dateFromInternetDateTimeString:string formatHint:DateFormatHintRFC822];
     }
     if ([elementName isEqualToString:@"description"]) {
-        self.text = string;
+        self.text = [string stringByConvertingHTMLToPlainText];
     }
     if ([elementName isEqualToString:@"title"]) {
         self.title = string;

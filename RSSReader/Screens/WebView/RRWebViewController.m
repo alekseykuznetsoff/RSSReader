@@ -20,10 +20,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Loading...";
 
     NSURL *url = [NSURL URLWithString:self.item.link];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    NSURL *url = [NSURL URLWithString:@"about:blank"];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];}
 
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView
