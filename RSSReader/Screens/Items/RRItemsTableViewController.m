@@ -10,6 +10,7 @@
 #import "RRDataManager.h"
 #import "RRItem.h"
 #import "RRItemCell.h"
+#import "RRWebViewController.h"
 
 @interface RRItemsTableViewController ()
 
@@ -79,6 +80,7 @@
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self performSegueWithIdentifier:NSStringFromClass(RRWebViewController.class) sender:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -111,6 +113,16 @@ heightForFooterInSection:(NSInteger)section
     RRItemCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(RRItemCell.class) forIndexPath:indexPath];
     [cell setModel:item];
     return cell;
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:NSStringFromClass(RRWebViewController.class)]) {
+        RRWebViewController *vc = segue.destinationViewController;
+        NSUInteger index = [[self.tableView indexPathForSelectedRow] row];
+        [vc setItem:self.objects[index]];
+    }
 }
 
 @end

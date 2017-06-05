@@ -10,6 +10,7 @@
 		5B5A2553BC3921F5EB420449 /* libPods-RSSReader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1472C44E37360B3D9DF40C /* libPods-RSSReader.a */; };
 		8617942A1EE5EF6600FEF468 /* RRItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 861794291EE5EF6600FEF468 /* RRItemCell.m */; };
 		8617942F1EE60A8A00FEF468 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8617942E1EE60A8A00FEF468 /* NSDate+InternetDateTime.m */; };
+		861794331EE6153E00FEF468 /* RRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861794321EE6153E00FEF468 /* RRWebViewController.m */; };
 		8623979B1EE182460086DC51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 862397971EE182460086DC51 /* AppDelegate.m */; };
 		8623979C1EE182460086DC51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 862397981EE182460086DC51 /* Assets.xcassets */; };
 		8623979E1EE182460086DC51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8623979A1EE182460086DC51 /* main.m */; };
@@ -31,6 +32,8 @@
 		861794291EE5EF6600FEF468 /* RRItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRItemCell.m; sourceTree = "<group>"; };
 		8617942D1EE60A8A00FEF468 /* NSDate+InternetDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+InternetDateTime.h"; sourceTree = "<group>"; };
 		8617942E1EE60A8A00FEF468 /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; };
+		861794311EE6153E00FEF468 /* RRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRWebViewController.h; sourceTree = "<group>"; };
+		861794321EE6153E00FEF468 /* RRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRWebViewController.m; sourceTree = "<group>"; };
 		862397781EE181770086DC51 /* RSSReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		862397961EE182460086DC51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		862397971EE182460086DC51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -109,6 +112,15 @@
 			path = "NSDate+InternetDateTime";
 			sourceTree = "<group>";
 		};
+		861794301EE6152A00FEF468 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				861794311EE6153E00FEF468 /* RRWebViewController.h */,
+				861794321EE6153E00FEF468 /* RRWebViewController.m */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 		8623976F1EE181770086DC51 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +168,7 @@
 		8623979F1EE1827E0086DC51 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				861794301EE6152A00FEF468 /* WebView */,
 				862397BB1EE1DD660086DC51 /* Items */,
 				862397B71EE1ABA60086DC51 /* Channels */,
 				862397A01EE1827E0086DC51 /* LaunchScreen.storyboard */,
@@ -378,6 +391,7 @@
 				862397BE1EE1DD800086DC51 /* RRItemsTableViewController.m in Sources */,
 				8617942A1EE5EF6600FEF468 /* RRItemCell.m in Sources */,
 				86F03D4F1EE2D6E60009B97F /* RRXMLParser.m in Sources */,
+				861794331EE6153E00FEF468 /* RRWebViewController.m in Sources */,
 				862397BA1EE1ABBD0086DC51 /* RRChannelsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
